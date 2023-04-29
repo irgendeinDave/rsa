@@ -36,7 +36,9 @@ public class Program
         Console.WriteLine($"Ecrypting message \"{input}\"");
 
         BigInteger p, q;
-        PrimeGenerator.genPrime();
+        p = PrimeGenerator.genPrime();
+        Console.WriteLine("First done");
+        q = PrimeGenerator.genPrime();
         //Console.WriteLine($"DEBUG:   p: {p}, q: {q}");
         
     }

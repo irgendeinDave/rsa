@@ -1,26 +1,38 @@
-using MathNet.Numerics;
+
 using System.Numerics;
 using System.Reflection.Metadata;
 
 /// <summary> 
-/// erzeuge Primzahlen für die RSA-Verschlüsselung mithilfe von Mill's Konstante
+/// erzeuge Primzahlen für die RSA-Verschlüsselung 
 /// </summary>
 public static class PrimeGenerator
 {
-    private static decimal millsConstant = 1.3063778838630806904686144926m;
        
     /// <summary> 
     /// erzeuge 32 bit Primzahl
     /// </summary>
-    public static int genPrime()
+    public static BigInteger genPrime()
     {
-        if (isPrime(uint.MaxValue / 4))
-            Console.WriteLine("is prime");
-        else 
-        Console.WriteLine("is not prime");
-        return 0;
+        // bestimme zufälligen startwert zwischen 1 Million und 100 Millionen
+        Random r = new Random();
+        BigInteger val = r.NextInt64(1_000_000, 100_000_000);
+        // sicherstellen, dass val ungerade ist
+        if (val % 2 == 0)
+            ++val;
+        Console.WriteLine($"Startwert: {val}");
+
+        while (true)        
+        {
+            if (isPrime(val))
+                return val;
+            val += 2;
+        }
+        
     }
 
+    /// <summary> prüfe, ob num eine Primzahl ist, indem 
+    /// getestet wird, ob sie durch eine Zahl teilbar ist, 
+    /// die kleiner ist als sie </summary>
     private static bool isPrime(BigInteger num)
     {
         if (num % 2 == 0)
@@ -32,8 +44,5 @@ public static class PrimeGenerator
                 return false;
         }
         return true;
-        
-    }
-    
-    
+    } 
 }
