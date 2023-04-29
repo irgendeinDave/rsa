@@ -1,0 +1,10 @@
+{
+  "version": 2,
+  "dgSpecHash": "LszycE0FQIXHSIsApKHbTEZOlBsySCRu7+1eIkr2Z3b+vXvyJM7Z2f29AuRtFZRbnWCv5rnNK4sPBmfa0iE4Yg==",
+  "success": true,
+  "projectFilePath": "/home/onebyte/coding/C#/rsa/rsa.csproj",
+  "expectedPackageFiles": [
+    "/home/onebyte/.nuget/packages/mathnet.numerics/5.0.0/mathnet.numerics.5.0.0.nupkg.sha512"
+  ],
+  "logs": []
+}

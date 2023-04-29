@@ -1,0 +1,17 @@
+/home/onebyte/coding/C#/rsa/bin/Debug/net7.0/rsa
+/home/onebyte/coding/C#/rsa/bin/Debug/net7.0/rsa.deps.json
+/home/onebyte/coding/C#/rsa/bin/Debug/net7.0/rsa.runtimeconfig.json
+/home/onebyte/coding/C#/rsa/bin/Debug/net7.0/rsa.dll
+/home/onebyte/coding/C#/rsa/bin/Debug/net7.0/rsa.pdb
+/home/onebyte/coding/C#/rsa/obj/Debug/net7.0/rsa.csproj.AssemblyReference.cache
+/home/onebyte/coding/C#/rsa/obj/Debug/net7.0/rsa.GeneratedMSBuildEditorConfig.editorconfig
+/home/onebyte/coding/C#/rsa/obj/Debug/net7.0/rsa.AssemblyInfoInputs.cache
+/home/onebyte/coding/C#/rsa/obj/Debug/net7.0/rsa.AssemblyInfo.cs
+/home/onebyte/coding/C#/rsa/obj/Debug/net7.0/rsa.csproj.CoreCompileInputs.cache
+/home/onebyte/coding/C#/rsa/obj/Debug/net7.0/rsa.dll
+/home/onebyte/coding/C#/rsa/obj/Debug/net7.0/refint/rsa.dll
+/home/onebyte/coding/C#/rsa/obj/Debug/net7.0/rsa.pdb
+/home/onebyte/coding/C#/rsa/obj/Debug/net7.0/rsa.genruntimeconfig.cache
+/home/onebyte/coding/C#/rsa/obj/Debug/net7.0/ref/rsa.dll
+/home/onebyte/coding/C#/rsa/bin/Debug/net7.0/MathNet.Numerics.dll
+/home/onebyte/coding/C#/rsa/obj/Debug/net7.0/rsa.csproj.CopyComplete
