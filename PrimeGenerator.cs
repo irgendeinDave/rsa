@@ -1,6 +1,9 @@
 
 using System.Numerics;
-using System.Reflection.Metadata;
+
+
+namespace PrimeNumberGenerator;
+
 
 /// <summary> 
 /// erzeuge Primzahlen für die RSA-Verschlüsselung 

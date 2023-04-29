@@ -1,18 +1,20 @@
-﻿using System;
-using System.Linq;
-using System.Numerics; //BigInteger
+﻿using System.Numerics; //BigInteger
+using PrimeNumberGenerator;
 
 public class Program
 {
-    private static String input;
+    private static String? input;
 
     ///<summary> 
     /// frage Benutzer nach Eingabe von Text
     /// </summary>
-    private static String promtInput()
+    private static String? promtInput()
     {
         Console.Write("Please enter your message: ");
-        return Console.ReadLine();
+        String? prompt = Console.ReadLine();
+        while (prompt == null)
+            prompt = Console.ReadLine();
+        return prompt;
     }
 
     public static void Main(String[] args)
@@ -35,11 +37,6 @@ public class Program
 
         Console.WriteLine($"Ecrypting message \"{input}\"");
 
-        BigInteger p, q;
-        p = PrimeGenerator.genPrime();
-        Console.WriteLine("First done");
-        q = PrimeGenerator.genPrime();
-        //Console.WriteLine($"DEBUG:   p: {p}, q: {q}");
-        
+        Decrypt d = new Decrypt();
     }
 }
