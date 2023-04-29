@@ -1,5 +1,6 @@
 using MathNet.Numerics;
 using System.Numerics;
+using System.Reflection.Metadata;
 
 /// <summary> 
 /// erzeuge Primzahlen für die RSA-Verschlüsselung mithilfe von Mill's Konstante
@@ -15,6 +16,19 @@ public static class PrimeGenerator
     {
         
         return 0;
+    }
+
+    private static bool isPrime(BigInteger num)
+    {
+        var start = (num - 1) % 2 == 0 ? num - 2 : num - 1;
+        Console.WriteLine("Start: " + start);
+        for (BigInteger i = start; i > 2; i -= 2)
+        {
+            if (num % i == 0)
+                return false;
+        }
+        return true;
+        
     }
     
     
