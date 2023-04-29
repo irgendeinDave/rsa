@@ -24,18 +24,15 @@ using PrimeNumberGenerator;
     private BigInteger findE()
     {
         // zufälliger Startwert zwischen 1/10 n und 5/10 n
-        var divRem = BigInteger.DivRem(n, new BigInteger(10));
-        BigInteger oneTenth = divRem.Quotient;
         Random r = new Random();
         IEnumerable<BigInteger> startSequence = r.NextBigIntegerSequence(n / 10, 5 * (n / 10));
-        BigInteger start = 0;
-        foreach (var val in startSequence)
-        {
-            start = val;
-            break; // nur der erste Wert wird benutzt
-        }
+        BigInteger start = startSequence.First();
+        Console.WriteLine("N: " + n);
+
+        //die nächsten möglichkeiten durchlaufen, bis ein Wert die Bedingung ggt(e, phi(n)) = 1 erfüllt
         while (Euclid.GreatestCommonDivisor(start, phi()) != 1)
         {
+            Console.WriteLine(start);
             ++start;
         }
 
