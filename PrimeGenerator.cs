@@ -14,15 +14,19 @@ public static class PrimeGenerator
     /// </summary>
     public static int genPrime()
     {
-        
+        if (isPrime(uint.MaxValue / 4))
+            Console.WriteLine("is prime");
+        else 
+        Console.WriteLine("is not prime");
         return 0;
     }
 
     private static bool isPrime(BigInteger num)
     {
-        var start = (num - 1) % 2 == 0 ? num - 2 : num - 1;
-        Console.WriteLine("Start: " + start);
-        for (BigInteger i = start; i > 2; i -= 2)
+        if (num % 2 == 0)
+            return false;
+        
+        for (BigInteger i = 3; i < (num - 1); i += 2)
         {
             if (num % i == 0)
                 return false;
