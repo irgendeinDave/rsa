@@ -18,7 +18,7 @@ public static class PrimeGenerator
     {
         // bestimme zufälligen startwert zwischen 1 Million und 100 Millionen
         Random r = new Random();
-        BigInteger val = r.NextInt64(100_000, 10_000_000);
+        BigInteger val = r.NextInt64(10_000, 1_000_000);
         // sicherstellen, dass val ungerade ist
         if (val % 2 == 0)
             ++val;
@@ -36,7 +36,6 @@ public static class PrimeGenerator
     /// die kleiner ist als sie </summary>
     public static bool isPrime(BigInteger num)
     {
-        Console.WriteLine("Testing primality of " + num);
         if (num % 2 == 0)
             return false;
         
@@ -45,7 +44,6 @@ public static class PrimeGenerator
             if (num % i == 0)
                 return false;
         }
-        Console.WriteLine("…Done");
         return true;
     } 
 }

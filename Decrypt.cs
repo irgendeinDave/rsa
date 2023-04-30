@@ -23,7 +23,7 @@ using PrimeNumberGenerator;
         n = p * q;
         e = findE();
         d = findD();
-        Console.WriteLine($"E valid: {Euclid.GreatestCommonDivisor(e, phi()) == 1 && e < phi() && PrimeGenerator.isPrime(e)}");
+        Console.WriteLine($"E valid: {Euclid.GreatestCommonDivisor(e, phi()) == 1 && e < phi()}");
         Console.WriteLine($"D valid: {e < phi() && (d * e) % phi() == 1}");
 
         // öffentlichen Schlüssel bekanntgeben
@@ -41,22 +41,24 @@ using PrimeNumberGenerator;
 
     private BigInteger findE()
     {
-        // zufälliger Startwert zwischen 1/10 n und 5/10 n
+        Console.WriteLine("Generating E");
+        // zufälliger Startwert zwischen 1 und 99/100 n
         Random r = new Random();
-        IEnumerable<BigInteger> startSequence = r.NextBigIntegerSequence(n / 10, 5 * (n / 10));
+        IEnumerable<BigInteger> startSequence = r.NextBigIntegerSequence(1, 99 * (n / 100));
         BigInteger start = startSequence.First();
 
         //die nächsten Möglichkeiten durchlaufen, bis ein Wert die Bedingung ggt(e, phi(n)) = 1 erfüllt
-        while (true)
-        {
-            if (Euclid.GreatestCommonDivisor(start, phi()) == 1 && PrimeGenerator.isPrime(start))                      
-                return start;           
+        while (Euclid.GreatestCommonDivisor(start, phi()) != 1)
+        {  
             ++start;
         }
+        Console.WriteLine("…Done");
+        return start;
     }
 
     private BigInteger findD()
     {
+        Console.WriteLine("Generating D");
         // Ähnliche Vorgehensweise wie in findE(), aber mit einer anderen Bedingung
         Random r = new Random();
         IEnumerable<BigInteger> startSequence = r.NextBigIntegerSequence(n / 100, n / 10);
@@ -66,7 +68,10 @@ using PrimeNumberGenerator;
         {
             ++start;
         }
+        Console.WriteLine("…Done");
         return start;
 
     }
+
+    
 }
