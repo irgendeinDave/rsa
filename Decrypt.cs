@@ -1,6 +1,4 @@
-using System.Data;
 using System.Numerics;
-using System.Runtime.Intrinsics.X86;
 using MathNet.Numerics;
 using MathNet.Numerics.Random;
 using PrimeNumberGenerator;

@@ -22,11 +22,11 @@ public class Program
         // Bestimme zu verschlüsselnde Nachricht
         if (args.Length > 0)
         {
-            // wenn argumente übergeben wurden, combiniere sie und nutze sie als input
+            // wenn Argumente übergeben wurden, kombiniere sie und nutze sie als Input
             String combinedArgs = "";
-            for (int i = 0; i < args.Length; i++)
+            foreach (String arg in args)
             {
-                combinedArgs += args[i] + " ";
+                combinedArgs += arg;
             }
             input = combinedArgs;
             
@@ -45,6 +45,6 @@ public class Program
             encryptedMessage = Encrypt.encryptMessage(decrypt.n, decrypt.e, inputNumber);
             Console.WriteLine($"Verschlüsselte Nachricht: {encryptedMessage}");
             Console.WriteLine($"Entschlüsselte Nachricht: {decrypt.decryptMessage(encryptedMessage)}");
-        }        
+        }    
     }
 }

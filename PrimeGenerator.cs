@@ -12,7 +12,7 @@ public static class PrimeGenerator
 {
        
     /// <summary> 
-    /// erzeuge 32 bit Primzahl
+    /// erzeuge Primzahl
     /// </summary>
     public static BigInteger genPrime()
     {
