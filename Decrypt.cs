@@ -73,5 +73,10 @@ using PrimeNumberGenerator;
 
     }
 
+    private int decryptMessage(int c)
+    {
+        BigInteger m = BigInteger.ModPow(new BigInteger(c), d, n);
+        return (int)m;
+    }
     
 }
