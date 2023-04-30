@@ -37,6 +37,14 @@ public class Program
 
         Console.WriteLine($"Ecrypting message \"{input}\"");
 
-        Decrypt d = new Decrypt();
+        Decrypt decrypt = new Decrypt();
+        int inputNumber;
+        int encryptedMessage;
+        if (int.TryParse(input, out inputNumber))
+        {
+            encryptedMessage = Encrypt.encryptMessage(decrypt.n, decrypt.e, inputNumber);
+            Console.WriteLine($"Verschlüsselte Nachricht: {encryptedMessage}");
+            Console.WriteLine($"Entschlüsselte Nachricht: {decrypt.decryptMessage(encryptedMessage)}");
+        }        
     }
 }

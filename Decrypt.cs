@@ -8,8 +8,8 @@ using PrimeNumberGenerator;
  class Decrypt
 {
     private BigInteger p, q;
-    private BigInteger n;
-    private BigInteger e;
+    public BigInteger n;
+    public BigInteger e;
     private BigInteger d;
     public Decrypt()
     {
@@ -73,7 +73,7 @@ using PrimeNumberGenerator;
 
     }
 
-    private int decryptMessage(int c)
+    public int decryptMessage(int c)
     {
         BigInteger m = BigInteger.ModPow(new BigInteger(c), d, n);
         return (int)m;
