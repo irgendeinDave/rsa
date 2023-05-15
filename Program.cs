@@ -9,14 +9,14 @@ public class Program
     ///<summary> 
     /// frage Benutzer nach Eingabe von Text
     /// </summary>
-    private static String? promtInput()
+    /*private static String? promtInput()
     {
-        Console.Write("Please enter your message: ");
+        Console.Write("Bitte Nachricht angeben: ");
         String? prompt = Console.ReadLine();
         while (prompt == null)
             prompt = Console.ReadLine();
         return prompt;
-    }
+    }*/
 
     public static void Main(String[] args)
     {
@@ -32,12 +32,11 @@ public class Program
             input = combinedArgs;
             
         }
-        // wenn keine Argumente gegeben wurden, fordere den Klartext vom Benutzer an
+        // wenn keine Argumente gegeben wurden, fordere Befehl vom Benutzer an
         else 
-            input = promtInput();
+            Console.WriteLine("Bitte \"encrypt\" oder \"decrypt\" als erstes Argument angeben!");
 
         // bestimmen, ob ver- oder entschlüsselt werden soll
-        Console.WriteLine("Debug: " + input);
         if (args[0] == "encrypt")
         {
             // Eingaben anfordern
@@ -72,7 +71,6 @@ public class Program
             for (int i = 0; i < split.Length; ++i)
             {
                 byte decrypted = decrypt.decryptMessage(int.Parse(split[i]));
-                Console.WriteLine(decrypted);
                 bytes[i] = decrypted;
             }
             Console.WriteLine($"Ihr klartext lauted: {bytesToText(bytes)}");
