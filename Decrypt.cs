@@ -1,9 +1,10 @@
 using System.Numerics;
+using System.Xml.Serialization;
 using MathNet.Numerics;
 using MathNet.Numerics.Random;
 using PrimeNumberGenerator;
 
- class Decrypt
+class Decrypt
 {
     private BigInteger p, q;
     public BigInteger n;
@@ -25,11 +26,11 @@ using PrimeNumberGenerator;
         Console.WriteLine($"D valid: {e < phi() && (d * e) % phi() == 1}");
 
         // öffentlichen Schlüssel bekanntgeben
-        Console.WriteLine("\nÖffentlicher Schlüssel:\n" + 
-        $"n: {n}\n" + 
-        $"e: {e}\n" + 
+        Console.WriteLine("\nÖffentlicher Schlüssel:\n" +
+        $"n: {n}\n" +
+        $"e: {e}\n" +
         "Text, der mit diesem Schlüssel verschlüsselt wurde, muss mit mit dieser Instanz des Programmes wieder entschlüsselt werden");
-        
+
     }
 
     private BigInteger phi()
@@ -47,28 +48,24 @@ using PrimeNumberGenerator;
 
         //die nächsten Möglichkeiten durchlaufen, bis ein Wert die Bedingung ggt(e, phi(n)) = 1 erfüllt
         while (Euclid.GreatestCommonDivisor(start, phi()) != 1)
-        {  
+        {
             ++start;
         }
         Console.WriteLine("…Done");
         return start;
     }
 
+    // d mithilfe des erweiterten euklidischen Algorithmus finden
     private BigInteger findD()
     {
         Console.WriteLine("Generating D");
-        // Ähnliche Vorgehensweise wie in findE(), aber mit einer anderen Bedingung
-        Random r = new Random();
-        IEnumerable<BigInteger> startSequence = r.NextBigIntegerSequence(n / 100, n / 10);
-        BigInteger start = startSequence.First();
+        BigInteger x, y;
+        var gcd = Euclid.ExtendedGreatestCommonDivisor(e, phi(), out x, out y);
+        if (gcd != 1)
+            throw new Exception("Error: d does not exist!");
 
-        while (start * e % phi() != 1)
-        {
-            ++start;
-        }
-        Console.WriteLine("…Done");
-        return start;
-
+        var res = (x % phi()) % phi();
+        return res;
     }
 
     public byte decryptMessage(int c)
@@ -76,5 +73,5 @@ using PrimeNumberGenerator;
         BigInteger m = BigInteger.ModPow(new BigInteger(c), d, n);
         return (byte)m;
     }
-    
+
 }
