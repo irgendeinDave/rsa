@@ -3,9 +3,9 @@ using System.Numerics;
 
 public static class Encrypt
 {
-    public static int encryptMessage(BigInteger n, BigInteger e, byte m)
+    public static BigInteger encryptMessage(BigInteger n, BigInteger e, BigInteger m)
     {
-        BigInteger c = BigInteger.ModPow(new BigInteger(m), e, n);
-        return (int)c;   
+        BigInteger c = BigInteger.ModPow(m, e, n);
+        return c;
     }
 }

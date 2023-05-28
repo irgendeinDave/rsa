@@ -30,10 +30,10 @@ public class Program
                 combinedArgs += arg;
             }
             input = combinedArgs;
-            
+
         }
         // wenn keine Argumente gegeben wurden, fordere den Klartext vom Benutzer an
-        else 
+        else
             input = promtInput();
 
         // bestimmen, ob ver- oder entschlüsselt werden soll
@@ -41,13 +41,13 @@ public class Program
         if (args[0] == "encrypt")
         {
             // Eingaben anfordern
-            Console.WriteLine("Geben sie n an: ");
+            Console.WriteLine("Geben Sie n an: ");
             BigInteger n = BigInteger.Parse(Console.ReadLine());
             Console.WriteLine("Geben Sie e an: ");
             BigInteger e = BigInteger.Parse(Console.ReadLine());
             Console.WriteLine("Geben Sie die zu verschlüsselnde Nachricht an: ");
             string? message = Console.ReadLine();
-            
+
             // Codieren der Nachricht
             byte[] encoded = textToBytes(message);
             foreach (var encodedLetter in encoded)
@@ -63,7 +63,7 @@ public class Program
 
             // Eingabe anfordern und in byte[] umwandeln
             Console.WriteLine("Geben Sie den zu entschlüsselnden Text an: ");
-            string? decryptInput = Console.ReadLine();   
+            string? decryptInput = Console.ReadLine();
             if (decryptInput == null)
                 return;
             string[] split = decryptInput.Split(' ');
@@ -71,13 +71,13 @@ public class Program
             // entschlüsseln
             for (int i = 0; i < split.Length; ++i)
             {
-                byte decrypted = decrypt.decryptMessage(int.Parse(split[i]));
+                byte decrypted = decrypt.decryptMessage(BigInteger.Parse(split[i]));
                 Console.WriteLine(decrypted);
                 bytes[i] = decrypted;
             }
             Console.WriteLine($"Ihr klartext lauted: {bytesToText(bytes)}");
-            
-        } 
+
+        }
         else Console.WriteLine("Bitte \"encrypt\" oder \"decrypt\" als erstes Argument angeben!");
     }
 
@@ -85,14 +85,14 @@ public class Program
     {
         if (inputText == null)
             return new byte[0];
-        
+
         var utf8 = Encoding.UTF8;
         byte[] encoded = utf8.GetBytes(inputText);
         return encoded;
     }
 
     private static string bytesToText(byte[] bytes)
-    {    
+    {
         var utf8 = Encoding.UTF8;
         return utf8.GetString(bytes);
     }

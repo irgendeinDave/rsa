@@ -1,10 +1,9 @@
 using System.Numerics;
-using System.Xml.Serialization;
 using MathNet.Numerics;
 using MathNet.Numerics.Random;
 using PrimeNumberGenerator;
 
-class Decrypt
+public class Decrypt
 {
     private BigInteger p, q;
     public BigInteger n;
@@ -12,12 +11,10 @@ class Decrypt
     private BigInteger d;
     public Decrypt()
     {
-        // p = PrimeGenerator.genPrime();
-        // Console.WriteLine("p found");
-        // q = PrimeGenerator.genPrime();
-        // Console.WriteLine("q found");
-        p = new BigInteger(353);
-        q = new BigInteger(149);
+        p = PrimeGenerator.genPrime();
+        Console.WriteLine("p found");
+        q = PrimeGenerator.genPrime();
+        Console.WriteLine("q found");
 
         n = p * q;
         e = findE();
@@ -30,7 +27,6 @@ class Decrypt
         $"n: {n}\n" +
         $"e: {e}\n" +
         "Text, der mit diesem Schlüssel verschlüsselt wurde, muss mit mit dieser Instanz des Programmes wieder entschlüsselt werden");
-
     }
 
     private BigInteger phi()
@@ -40,7 +36,6 @@ class Decrypt
 
     private BigInteger findE()
     {
-        Console.WriteLine("Generating E");
         // zufälliger Startwert zwischen 1 und 99/100 n
         Random r = new Random();
         IEnumerable<BigInteger> startSequence = r.NextBigIntegerSequence(1, 99 * (n / 100));
@@ -51,14 +46,12 @@ class Decrypt
         {
             ++start;
         }
-        Console.WriteLine("…Done");
         return start;
     }
 
     // d mithilfe des erweiterten euklidischen Algorithmus finden
     private BigInteger findD()
     {
-        Console.WriteLine("Generating D");
         BigInteger x, y;
         var gcd = Euclid.ExtendedGreatestCommonDivisor(e, phi(), out x, out y);
         if (gcd != 1)
@@ -68,10 +61,9 @@ class Decrypt
         return res;
     }
 
-    public byte decryptMessage(int c)
+    public byte decryptMessage(BigInteger c)
     {
-        BigInteger m = BigInteger.ModPow(new BigInteger(c), d, n);
+        BigInteger m = BigInteger.ModPow(c, d, n);
         return (byte)m;
     }
-
 }
