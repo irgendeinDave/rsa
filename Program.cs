@@ -37,46 +37,50 @@ public class Program
             input = promtInput();
 
         // bestimmen, ob ver- oder entschlüsselt werden soll
-        Console.WriteLine("Debug: " + input);
-        if (args[0] == "encrypt")
+        if (args[0] == "encrypt" || args[0] == "e")
         {
-            // Eingaben anfordern
-            Console.WriteLine("Geben Sie n an: ");
-            BigInteger n = BigInteger.Parse(Console.ReadLine());
-            Console.WriteLine("Geben Sie e an: ");
-            BigInteger e = BigInteger.Parse(Console.ReadLine());
-            Console.WriteLine("Geben Sie die zu verschlüsselnde Nachricht an: ");
-            string? message = Console.ReadLine();
-
-            // Codieren der Nachricht
-            byte[] encoded = textToBytes(message);
-            foreach (var encodedLetter in encoded)
+            while (true)
             {
-                Console.Write($"{Encrypt.encryptMessage(n, e, encodedLetter)} ");
-            }
+                // Eingaben anfordern
+                Console.WriteLine("Geben Sie n an: ");
+                BigInteger n = BigInteger.Parse(Console.ReadLine());
+                Console.WriteLine("Geben Sie e an: ");
+                BigInteger e = BigInteger.Parse(Console.ReadLine());
+                Console.WriteLine("Geben Sie die zu verschlüsselnde Nachricht an: ");
+                string? message = Console.ReadLine();
 
+                // Codieren der Nachricht
+                byte[] encoded = textToBytes(message);
+                foreach (var encodedLetter in encoded)
+                {
+                    Console.Write($"{Encrypt.encryptMessage(n, e, encodedLetter)} ");
+                }
+                Console.Write(new String('\n', 3));
+            }
         }
-        else if (args[0] == "decrypt")
+        else if (args[0] == "decrypt" || args[0] == "d")
         {
             // Schlüsselgenerierung
             Decrypt decrypt = new Decrypt();
-
-            // Eingabe anfordern und in byte[] umwandeln
-            Console.WriteLine("Geben Sie den zu entschlüsselnden Text an: ");
-            string? decryptInput = Console.ReadLine();
-            if (decryptInput == null)
-                return;
-            string[] split = decryptInput.Split(' ');
-            byte[] bytes = new byte[split.Length];
-            // entschlüsseln
-            for (int i = 0; i < split.Length; ++i)
+            while (true)
             {
-                byte decrypted = decrypt.decryptMessage(BigInteger.Parse(split[i]));
-                Console.WriteLine(decrypted);
-                bytes[i] = decrypted;
+                // Eingabe anfordern und in byte[] umwandeln
+                Console.WriteLine("Geben Sie den zu entschlüsselnden Text an: ");
+                string? decryptInput = Console.ReadLine();
+                if (decryptInput == null)
+                    return;
+                string[] split = decryptInput.Split(' ');
+                byte[] bytes = new byte[split.Length];
+                // entschlüsseln
+                for (int i = 0; i < split.Length; ++i)
+                {
+                    byte decrypted = decrypt.decryptMessage(BigInteger.Parse(split[i]));
+                    Console.WriteLine(decrypted);
+                    bytes[i] = decrypted;
+                }
+                Console.WriteLine($"Ihr klartext lauted: {bytesToText(bytes)}");
+                Console.Write(new String('\n', 3));
             }
-            Console.WriteLine($"Ihr klartext lauted: {bytesToText(bytes)}");
-
         }
         else Console.WriteLine("Bitte \"encrypt\" oder \"decrypt\" als erstes Argument angeben!");
     }
