@@ -11,17 +11,24 @@ public class Decrypt
     private BigInteger d;
     public Decrypt()
     {
-        p = PrimeGenerator.genPrime();
-        Console.WriteLine("p found: " + p);
-        q = PrimeGenerator.genPrime();
-        Console.WriteLine("q found:" + q);
+        do
+        {
+            p = PrimeGenerator.genPrime();
+            Console.WriteLine("p found: " + p);
+            q = PrimeGenerator.genPrime();
+            Console.WriteLine("q found:" + q);
 
-        n = p * q;
-        e = findE();
-        d = findD();
+            n = p * q;
+            e = findE();
+            d = findD();
+            Console.WriteLine($"d: {d}");
+            
+        } while (!(e < phi() && (d * e) % phi() == 1)); // findD() gibt manchmal einen negativen Wert zurück, wodurch die 
+        // Verschlüsselung Fehlschägt. Deshalb wiederholen wir den Vorgang so lange, bis ein gültiger Schlüssel erzeugt wurde
+
         Console.WriteLine($"E valid: {Euclid.GreatestCommonDivisor(e, phi()) == 1 && e < phi()}");
         Console.WriteLine($"D valid: {e < phi() && (d * e) % phi() == 1}");
-
+        
         // öffentlichen Schlüssel bekanntgeben
         Console.WriteLine("\nÖffentlicher Schlüssel:\n" +
         $"n: {n}\n" +

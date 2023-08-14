@@ -33,9 +33,6 @@ public static class PrimeGenerator
     }
     
     private static readonly int repetitions = 10;
-    /// <summary> prüfe, ob num eine Primzahl ist, indem 
-    /// getestet wird, ob sie durch eine Zahl teilbar ist, 
-    /// die kleiner ist als sie </summary>
     private static bool isProbablyPrime(BigInteger m)
     {
         if (m % 2 == 0)
