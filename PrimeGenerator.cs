@@ -18,8 +18,8 @@ public static class PrimeGenerator
     public static BigInteger genPrime()
     {
         // bestimme zufälligen startwert zwischen 1 Million und 100 Millionen
-        Random r = new Random();
-        BigInteger val = r.NextInt64(10_000, 1_000_000);
+        Random r = new CryptoRandomSource();
+        BigInteger val = r.NextBigIntegerSequence(BigInteger.Parse("10000000"), BigInteger.Parse("1000000000000")).First();
         // sicherstellen, dass val ungerade ist
         if (val % 2 == 0)
             ++val;
