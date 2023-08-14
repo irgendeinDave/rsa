@@ -1,20 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "/home/onebyte/coding/C#/rsa/rsa.csproj": {}
+    "/home/david/coding/C#/rsa/rsa.csproj": {}
   },
   "projects": {
-    "/home/onebyte/coding/C#/rsa/rsa.csproj": {
+    "/home/david/coding/C#/rsa/rsa.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "/home/onebyte/coding/C#/rsa/rsa.csproj",
+        "projectUniqueName": "/home/david/coding/C#/rsa/rsa.csproj",
         "projectName": "rsa",
-        "projectPath": "/home/onebyte/coding/C#/rsa/rsa.csproj",
-        "packagesPath": "/home/onebyte/.nuget/packages/",
-        "outputPath": "/home/onebyte/coding/C#/rsa/obj/",
+        "projectPath": "/home/david/coding/C#/rsa/rsa.csproj",
+        "packagesPath": "/home/david/.nuget/packages/",
+        "outputPath": "/home/david/coding/C#/rsa/obj/",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "/home/onebyte/.nuget/NuGet/NuGet.Config"
+          "/home/david/.nuget/NuGet/NuGet.Config"
         ],
         "originalTargetFrameworks": [
           "net7.0"
@@ -59,7 +59,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "/usr/share/dotnet/sdk/7.0.203/RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "/usr/share/dotnet/sdk/7.0.306/RuntimeIdentifierGraph.json"
         }
       }
     }

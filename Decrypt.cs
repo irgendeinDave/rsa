@@ -12,9 +12,9 @@ public class Decrypt
     public Decrypt()
     {
         p = PrimeGenerator.genPrime();
-        Console.WriteLine("p found");
+        Console.WriteLine("p found: " + p);
         q = PrimeGenerator.genPrime();
-        Console.WriteLine("q found");
+        Console.WriteLine("q found:" + q);
 
         n = p * q;
         e = findE();
@@ -52,8 +52,7 @@ public class Decrypt
     // d mithilfe des erweiterten euklidischen Algorithmus finden
     private BigInteger findD()
     {
-        BigInteger x, y;
-        var gcd = Euclid.ExtendedGreatestCommonDivisor(e, phi(), out x, out y);
+        var gcd = Euclid.ExtendedGreatestCommonDivisor(e, phi(), out BigInteger x, out BigInteger y);
         if (gcd != 1)
             throw new Exception("Error: d does not exist!");
 
