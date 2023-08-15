@@ -24,7 +24,7 @@ public class Decrypt
             Console.WriteLine($"d: {d}");
             
         } while (!(e < phi() && (d * e) % phi() == 1)); // findD() gibt manchmal einen negativen Wert zurück, wodurch die 
-        // Verschlüsselung Fehlschägt. Deshalb wiederholen wir den Vorgang so lange, bis ein gültiger Schlüssel erzeugt wurde
+        // Verschlüsselung fehlschägt. Deshalb wiederholen wir den Vorgang so lange, bis ein gültiger Schlüssel erzeugt wurde
 
         Console.WriteLine($"E valid: {Euclid.GreatestCommonDivisor(e, phi()) == 1 && e < phi()}");
         Console.WriteLine($"D valid: {e < phi() && (d * e) % phi() == 1}");
@@ -48,7 +48,7 @@ public class Decrypt
         IEnumerable<BigInteger> startSequence = r.NextBigIntegerSequence(1, 99 * (n / 100));
         BigInteger start = startSequence.First();
 
-        //die nächsten Möglichkeiten durchlaufen, bis ein Wert die Bedingung ggt(e, phi(n)) = 1 erfüllt
+        //die nächsten Möglichkeiten durchlaufen, bis ein Wert Teilerfremd zu Phi ist
         while (Euclid.GreatestCommonDivisor(start, phi()) != 1)
         {
             ++start;
@@ -59,11 +59,11 @@ public class Decrypt
     // d mithilfe des erweiterten euklidischen Algorithmus finden
     private BigInteger findD()
     {
-        var gcd = Euclid.ExtendedGreatestCommonDivisor(e, phi(), out BigInteger x, out BigInteger y);
+        BigInteger gcd = Euclid.ExtendedGreatestCommonDivisor(e, phi(), out BigInteger x, out BigInteger y);
         if (gcd != 1)
-            throw new Exception("Error: d does not exist!");
+            throw new Exception("Kein Wert für d möglich!");
 
-        var res = (x % phi()) % phi();
+        BigInteger res = (x % phi()) % phi();
         return res;
     }
 
