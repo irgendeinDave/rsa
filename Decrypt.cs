@@ -11,20 +11,16 @@ public class Decrypt
     private BigInteger d;
     public Decrypt()
     {
-        do
-        {
-            p = PrimeGenerator.genPrime();
-            Console.WriteLine("p found: " + p);
-            q = PrimeGenerator.genPrime();
-            Console.WriteLine("q found:" + q);
+        
+        p = PrimeGenerator.genPrime();
+        Console.WriteLine("p found: " + p);
+        q = PrimeGenerator.genPrime();
+        Console.WriteLine("q found:" + q);
 
-            n = p * q;
-            e = findE();
-            d = findD();
-            Console.WriteLine($"d: {d}");
-            
-        } while (!(e < phi() && (d * e) % phi() == 1)); // findD() gibt manchmal einen negativen Wert zurück, wodurch die 
-        // Verschlüsselung fehlschägt. Deshalb wiederholen wir den Vorgang so lange, bis ein gültiger Schlüssel erzeugt wurde
+        n = p * q;
+        e = findE();
+        d = findD();
+        Console.WriteLine($"d: {d}");
 
         Console.WriteLine($"E valid: {Euclid.GreatestCommonDivisor(e, phi()) == 1 && e < phi()}");
         Console.WriteLine($"D valid: {e < phi() && (d * e) % phi() == 1}");
@@ -56,15 +52,21 @@ public class Decrypt
         return start;
     }
 
-    // d mithilfe des erweiterten euklidischen Algorithmus finden
+    // Das multiplikative inverse d von e und phi (den Privatschlüssel) mithilfe des erweiterten euklidischen Algorithmus finden
     private BigInteger findD()
     {
+        // führe erweiterten euklidischen Algorithmus durch
         BigInteger gcd = Euclid.ExtendedGreatestCommonDivisor(e, phi(), out BigInteger x, out BigInteger y);
+        
+        // modulares multiplikatives Inverses nur verfügbar, wenn e und phi teilerfremd sind
         if (gcd != 1)
             throw new Exception("Kein Wert für d möglich!");
 
-        BigInteger res = (x % phi()) % phi();
-        return res;
+        // das modulare multiplikative Inverse ergibt sich aus dem erweiterten euklidischen Algorithmus
+        // durch die Formel inv = (x % phi + phi) % phi
+        // Das Phi in der Klammer wird dazu addiert, damit das Ergebnis auch für Zahlen funktioniert
+        BigInteger inv = (x % phi() + phi()) % phi();
+        return inv;
     }
 
     public byte decryptMessage(BigInteger c)
