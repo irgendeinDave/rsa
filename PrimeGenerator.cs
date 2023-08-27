@@ -19,7 +19,7 @@ public static class PrimeGenerator
     {
         // bestimme zufälligen Startwert 
         Random r = new CryptoRandomSource();
-        BigInteger val = r.NextBigIntegerSequence(BigInteger.Parse("10000000"), BigInteger.Parse("1000000000000")).First();
+        BigInteger val = r.NextBigIntegerSequence(BigInteger.Parse("10000000000000000000000"), BigInteger.Parse("1000000000000000000000000000")).First();
         // sicherstellen, dass val ungerade ist
         if (val % 2 == 0)
             ++val;

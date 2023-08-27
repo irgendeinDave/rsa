@@ -6,7 +6,7 @@ public class Program
 {
     private static String? input;
 
-    ///<summary> 
+    /// <summary> 
     /// frage Benutzer nach Eingabe von Text
     /// </summary>
     private static String promtInput()
