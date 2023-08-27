@@ -1,10 +1,8 @@
-
 using System.Numerics;
 using MathNet.Numerics;
 using MathNet.Numerics.Random;
 
 namespace PrimeNumberGenerator;
-
 
 /// <summary> 
 /// erzeuge Primzahlen für die RSA-Verschlüsselung 
@@ -14,6 +12,8 @@ public static class PrimeGenerator
        
     /// <summary> 
     /// erzeuge Primzahl
+    /// generiere einen zufälligen Startwert und prüfe, ob er eine Primzahl ist
+    /// erhöhe den Startwert um 2 und prüfe den neuen Wert so lange, bis eine Primzahl gefunden wurde
     /// </summary>
     public static BigInteger genPrime()
     {
@@ -32,7 +32,7 @@ public static class PrimeGenerator
         }   
     }
     
-    private static readonly int repetitions = 10;
+    private static readonly int Repetitions = 10;
     /// <summary>
     /// Führe den Miller-Rabin Test durch, um die Primalität einer Zahl zu prüfen
     /// </summary>
@@ -52,7 +52,7 @@ public static class PrimeGenerator
         BigInteger d = FindD(m, s);
         
         // führe den Test mit mehreren Zeugen durch
-        for (int i = 0; i < repetitions; ++i)
+        for (int i = 0; i < Repetitions; ++i)
         {
             // generiere zufälligen Zeugen a
             Random rand = new CryptoRandomSource();
@@ -94,7 +94,7 @@ public static class PrimeGenerator
         while (d % 2 == 0)
         {
             d /= 2;
-            s++;
+            ++s;
         }
         return s;
     }

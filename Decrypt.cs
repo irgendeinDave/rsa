@@ -6,22 +6,23 @@ using PrimeNumberGenerator;
 public class Decrypt
 {
     private BigInteger p, q;
-    public BigInteger n;
-    public BigInteger e;
+    private BigInteger n;
+    private BigInteger e;
     private BigInteger d;
     public Decrypt()
     {
-        
+        // Generiere Primzahlen p und q
         p = PrimeGenerator.genPrime();
         Console.WriteLine("p found: " + p);
         q = PrimeGenerator.genPrime();
-        Console.WriteLine("q found:" + q);
+        Console.WriteLine("q found: " + q);
 
         n = p * q;
         e = findE();
         d = findD();
         Console.WriteLine($"d: {d}");
-
+    
+        // Debug ausgaben zur Überprüfung, ob E und D gültig sind
         Console.WriteLine($"E valid: {Euclid.GreatestCommonDivisor(e, phi()) == 1 && e < phi()}");
         Console.WriteLine($"D valid: {e < phi() && (d * e) % phi() == 1}");
         
@@ -69,6 +70,11 @@ public class Decrypt
         return inv;
     }
 
+    /// <summary>
+    /// Entschlüssele den Geheimtext c mit der Formel m = c^d mod m
+    /// </summary>
+    /// <param name="c">Der geheimtext c</param>
+    /// <returns>den Klartext m</returns>
     public byte decryptMessage(BigInteger c)
     {
         BigInteger m = BigInteger.ModPow(c, d, n);
