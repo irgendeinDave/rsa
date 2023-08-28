@@ -56,7 +56,7 @@ public static class PrimeGenerator
         {
             // generiere zufälligen Zeugen a
             Random rand = new CryptoRandomSource();
-            var a  = rand.NextBigIntegerSequence(BigInteger.Parse("1000000000"), BigInteger.Parse("1000000000000")).First();
+            var a  = rand.NextBigIntegerSequence(3, m - 2).First();
             
             // setze Startwert für x zu a^d mod m
             BigInteger x = BigInteger.ModPow(a, d, m);
@@ -75,7 +75,7 @@ public static class PrimeGenerator
                     break;
             }
             // Wenn nach Schleife x nicht m - 1 ist, ist m keine Primzahl
-            if(x != m - 1)
+            if (x != m - 1)
                 return false;
         }
         // wenn nach allen Iterationen nicht festgestellt wurde, dass m die Bedingungen für eine Primzahl nicht erfüllt, ist m wohl eine Primzahl
