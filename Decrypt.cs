@@ -26,6 +26,8 @@ public class Decrypt
         Console.WriteLine($"E valid: {Euclid.GreatestCommonDivisor(e, phi()) == 1 && e < phi()}");
         Console.WriteLine($"D valid: {e < phi() && (d * e) % phi() == 1}");
         
+        
+        
         // öffentlichen Schlüssel bekanntgeben
         Console.WriteLine("\nÖffentlicher Schlüssel:\n" +
         $"n: {n}\n" +
@@ -40,9 +42,9 @@ public class Decrypt
 
     private BigInteger findE()
     {
-        // zufälliger Startwert zwischen 1 und 99/100 n
+        // zufälliger Startwert zwischen 1 und 99/100 phi(n)
         Random r = new Random();
-        IEnumerable<BigInteger> startSequence = r.NextBigIntegerSequence(1, 99 * (n / 100));
+        IEnumerable<BigInteger> startSequence = r.NextBigIntegerSequence(1, 99 * (phi() / 100));
         BigInteger start = startSequence.First();
 
         //die nächsten Möglichkeiten durchlaufen, bis ein Wert Teilerfremd zu Phi ist
@@ -64,7 +66,7 @@ public class Decrypt
             throw new Exception("Kein Wert für d möglich!");
 
         // das modulare multiplikative Inverse ergibt sich aus dem erweiterten euklidischen Algorithmus
-        // durch die Formel inv = (x % phi + phi) % phi
+        // durch die Formel d = (x % phi + phi) % phi
         // Das Phi in der Klammer wird dazu addiert, damit das Ergebnis auch für Zahlen funktioniert
         BigInteger inv = (x % phi() + phi()) % phi();
         return inv;

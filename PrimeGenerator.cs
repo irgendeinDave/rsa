@@ -9,7 +9,7 @@ namespace PrimeNumberGenerator;
 /// </summary>
 public static class PrimeGenerator
 {
-       
+    
     /// <summary> 
     /// erzeuge Primzahl
     /// generiere einen zufälligen Startwert und prüfe, ob er eine Primzahl ist
@@ -67,7 +67,7 @@ public static class PrimeGenerator
             for (int r = 0; r < s; ++r)
             {
                 x = BigInteger.ModPow(x, 2, m);
-                // wenn bei irgendeinem Zeugen x = 1, ist m keine Primzahl
+                // wenn bei irgendeinem Zeugen x == 1, ist m keine Primzahl
                 if(x == 1)
                     return false;
                 // wenn x == m - 1, prüfe den nächsten Zeugen
