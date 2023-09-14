@@ -68,7 +68,6 @@ public class Program
                         continue;
                     
                     byte decrypted = decrypt.decryptMessage(BigInteger.Parse(split[i]));
-                    Console.WriteLine(decrypted);
                     bytes[i] = decrypted;
                 }
                 Console.WriteLine($"Ihr klartext lauted: {bytesToText(bytes)}");

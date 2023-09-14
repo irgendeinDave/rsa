@@ -13,9 +13,7 @@ public class Decrypt
     {
         // Generiere Primzahlen p und q
         p = PrimeGenerator.genPrime();
-        Console.WriteLine("p found: " + p);
         q = PrimeGenerator.genPrime();
-        Console.WriteLine("q found: " + q);
 
         n = p * q;
         e = findE();
@@ -23,8 +21,8 @@ public class Decrypt
         Console.WriteLine($"d: {d}");
     
         // Debug ausgaben zur Überprüfung, ob E und D gültig sind
-        Console.WriteLine($"E valid: {Euclid.GreatestCommonDivisor(e, phi()) == 1 && e < phi()}");
-        Console.WriteLine($"D valid: {e < phi() && (d * e) % phi() == 1}");
+        // Console.WriteLine($"E valid: {Euclid.GreatestCommonDivisor(e, phi()) == 1 && e < phi()}");
+        // Console.WriteLine($"D valid: {e < phi() && (d * e) % phi() == 1}");
         
         
         
