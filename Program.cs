@@ -1,5 +1,4 @@
-﻿using PrimeNumberGenerator;
-using System.Numerics;
+﻿using System.Numerics;
 using System.Text;
 
 public class Program
@@ -13,14 +12,14 @@ public class Program
     {
         Console.Write("Please enter your message: ");
         String? prompt = Console.ReadLine();
-        while (prompt == null)
+        while (String.IsNullOrEmpty(prompt))
             prompt = Console.ReadLine();
         return prompt;
     }
 
     public static void Main(String[] args)
     {
-        // Bestimme, ob entschlüsselt oder verschlüsselt werden soll
+        // Bestimme, ob entschluesselt oder verschluesselt werden soll
         if (args.Length > 0)
             input = args[0];
         else // wenn keine Argumente gegeben wurden, fordere den Klartext vom Benutzer an
@@ -35,14 +34,14 @@ public class Program
                 BigInteger n = BigInteger.Parse(Console.ReadLine());
                 Console.WriteLine("Geben Sie e an: ");
                 BigInteger e = BigInteger.Parse(Console.ReadLine());
-                Console.WriteLine("Geben Sie die zu verschlüsselnde Nachricht an: ");
+                Console.WriteLine("Geben Sie die zu verschluesselnde Nachricht an: ");
                 string? message = Console.ReadLine();
 
                 // Codieren der Nachricht
                 byte[] encoded = textToBytes(message);
                 foreach (var encodedLetter in encoded)
                 {
-                    // Verschlüsseln der Nachricht
+                    // Verschluesseln der Nachricht
                     Console.Write($"{Encrypt.encryptMessage(n, e, encodedLetter)} ");
                 }
                 Console.Write(new String('\n', 3));
@@ -50,18 +49,18 @@ public class Program
         }
         if (input == "decrypt" || input == "d")
         {
-            // Schlüsselgenerierung
+            // Schluesselgenerierung
             Decrypt decrypt = new Decrypt();
             while (true)
             {
                 // Eingabe anfordern und in byte[] umwandeln
-                Console.WriteLine("Geben Sie den zu entschlüsselnden Text an: ");
+                Console.WriteLine("Geben Sie den zu entschluesselnden Text an: ");
                 string? decryptInput = Console.ReadLine();
                 if (string.IsNullOrEmpty(decryptInput))
                     continue;
                 string[] split = decryptInput.Split(' ');
                 byte[] bytes = new byte[split.Length];
-                // entschlüsseln
+                // entschluesseln
                 for (int i = 0; i < split.Length; ++i)
                 {
                     if (string.IsNullOrEmpty(split[i]))
@@ -70,10 +69,10 @@ public class Program
                     byte decrypted = decrypt.decryptMessage(BigInteger.Parse(split[i]));
                     bytes[i] = decrypted;
                 }
-                Console.WriteLine($"Ihr klartext lauted: {bytesToText(bytes)}");
+                Console.WriteLine($"Ihr Klartext lautet: {bytesToText(bytes)}");
                 Console.Write(new String('\n', 3));
             }
-        } // ungültiges Argument
+        } // ungueltiges Argument
         Console.WriteLine("Bitte \"encrypt\" oder \"decrypt\" als erstes Argument angeben!");
     }
 
@@ -89,7 +88,7 @@ public class Program
         return encoded;
     }
 
-    // Codierung des als Byte-Array gegebenen wieder entschlüsselten Textes zu Klartext mithilfe der C#-Standardbibliothek
+    // Codierung des als Byte-Array gegebenen wieder entschluesselten Textes zu Klartext mithilfe der C#-Standardbibliothek
     private static string bytesToText(byte[] bytes)
     {
         var utf8 = Encoding.UTF8;

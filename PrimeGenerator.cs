@@ -5,19 +5,19 @@ using MathNet.Numerics.Random;
 namespace PrimeNumberGenerator;
 
 /// <summary> 
-/// erzeuge Primzahlen für die RSA-Verschlüsselung 
+/// erzeuge Primzahlen fuer die RSA-Verschluesselung 
 /// </summary>
 public static class PrimeGenerator
 {
     
     /// <summary> 
     /// erzeuge Primzahl
-    /// generiere einen zufälligen Startwert und prüfe, ob er eine Primzahl ist
-    /// erhöhe den Startwert um 2 und prüfe den neuen Wert so lange, bis eine Primzahl gefunden wurde
+    /// generiere einen zufaelligen Startwert und pruefe, ob er eine Primzahl ist
+    /// erhoehe den Startwert um 2 und pruefe den neuen Wert so lange, bis eine Primzahl gefunden wurde
     /// </summary>
     public static BigInteger genPrime()
     {
-        // bestimme zufälligen Startwert 
+        // bestimme zufaelligen Startwert 
         Random r = new CryptoRandomSource();
         BigInteger val = r.NextBigIntegerSequence(BigInteger.Pow(new BigInteger(2), 512), BigInteger.Pow(new BigInteger(2), 1024)).First();
         // sicherstellen, dass val ungerade ist
@@ -34,16 +34,16 @@ public static class PrimeGenerator
     
     private static readonly int Repetitions = 10;
     /// <summary>
-    /// Führe den Miller-Rabin Test durch, um die Primalität einer Zahl zu prüfen
+    /// Fuehre den Miller-Rabin Test durch, um die Primalitaet einer Zahl zu pruefen
     /// </summary>
-    /// <param name="m">Die zu prüfende Zahl</param>
+    /// <param name="m">Die zu pruefende Zahl</param>
     /// <returns>
     /// True, wenn m mit sehr hoher Wahrscheinlichkeit eine Primzahl ist
     /// False, wenn m mit Sicherheit keine Primzahl ist
     /// </returns>
     private static bool IsProbablyPrime(BigInteger m)
     {
-        // es dürfen nur ungerade Zahlen getestet werden
+        // es duerfen nur ungerade Zahlen getestet werden
         if (m % 2 == 0)
             return false;
         
@@ -51,26 +51,26 @@ public static class PrimeGenerator
         int s = FindS(m);
         BigInteger d = FindD(m, s);
         
-        // führe den Test mit mehreren Zeugen durch
+        // fuehre den Test mit mehreren Zeugen durch
         for (int i = 0; i < Repetitions; ++i)
         {
-            // generiere zufälligen Zeugen a
+            // generiere zufaelligen Zeugen a
             Random rand = new CryptoRandomSource();
             var a  = rand.NextBigIntegerSequence(3, m - 2).First();
             
-            // setze Startwert für x zu a^d mod m
+            // setze Startwert fuer x zu a^d mod m
             BigInteger x = BigInteger.ModPow(a, d, m);
             if(x == 1 || x == m - 1)
                 continue;
             
-            // führe s mal die Berechnung x = x² mod m durch
+            // fuehre s mal die Berechnung x = x² mod m durch
             for (int r = 0; r < s; ++r)
             {
                 x = BigInteger.ModPow(x, 2, m);
                 // wenn bei irgendeinem Zeugen x == 1, ist m keine Primzahl
                 if(x == 1)
                     return false;
-                // wenn x == m - 1, prüfe den nächsten Zeugen
+                // wenn x == m - 1, pruefe den naechsten Zeugen
                 if(x == m - 1)
                     break;
             }
@@ -78,14 +78,14 @@ public static class PrimeGenerator
             if (x != m - 1)
                 return false;
         }
-        // wenn nach allen Iterationen nicht festgestellt wurde, dass m die Bedingungen für eine Primzahl nicht erfüllt, ist m wohl eine Primzahl
+        // wenn nach allen Iterationen nicht festgestellt wurde, dass m die Bedingungen fuer eine Primzahl nicht erfuellt, ist m wohl eine Primzahl
         return true;
     }
     
     /// <summary>
     /// Finde den s, also die Anzahl, wie oft m ohne Rest durch zwei teilbar ist
     /// </summary>
-    /// <param name="m">Die zu prüfende Zahl m</param>
+    /// <param name="m">Die zu pruefende Zahl m</param>
     /// <returns>s</returns>
     private static int FindS(BigInteger m)
     {
@@ -102,8 +102,8 @@ public static class PrimeGenerator
     /// <summary>
     /// Wende die Formel d = (m - 1) / 2^s an, um d zu bestimmen
     /// </summary>
-    /// <param name="m">Die zu prüfende Zahl m</param>
-    /// <param name="s">Der zuvor bestimmete Wert für s</param>
+    /// <param name="m">Die zu pruefende Zahl m</param>
+    /// <param name="s">Der zuvor bestimmete Wert fuer s</param>
     /// <returns>d</returns>
     private static BigInteger FindD(BigInteger m, int s)
     {
