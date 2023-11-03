@@ -20,14 +20,14 @@ public class Decrypt
         d = findD();
         Console.WriteLine($"d: {d}");
     
-        // Debug ausgaben zur UEberpruefung, ob E und D gueltig sind
+        // Debug ausgaben zur Ueberpruefung, ob E und D gueltig sind
         // Console.WriteLine($"E valid: {Euclid.GreatestCommonDivisor(e, phi()) == 1 && e < phi()}");
         // Console.WriteLine($"D valid: {e < phi() && (d * e) % phi() == 1}");
         
         
         
         // oeffentlichen Schluessel bekanntgeben
-        Console.WriteLine("\nOEffentlicher Schluessel:\n" +
+        Console.WriteLine("\nOeffentlicher Schluessel:\n" +
         $"n: {n}\n" +
         $"e: {e}\n" +
         "Text, der mit diesem Schluessel verschluesselt wurde, muss mit mit dieser Instanz des Programmes wieder entschluesselt werden");
