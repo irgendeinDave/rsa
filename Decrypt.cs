@@ -42,7 +42,7 @@ public class Decrypt
     {
         // zufaelliger Startwert zwischen 1 und 99/100 phi(n)
         Random r = new Random();
-        IEnumerable<BigInteger> startSequence = r.NextBigIntegerSequence(1, 99 * (phi() / 100));
+        IEnumerable<BigInteger> startSequence = r.NextBigIntegerSequence(BigInteger.Pow(new BigInteger(2), 16), BigInteger.Pow(new BigInteger(2), 256));
         BigInteger start = startSequence.First();
 
         //die naechsten Moeglichkeiten durchlaufen, bis ein Wert Teilerfremd zu Phi ist
