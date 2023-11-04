@@ -12,19 +12,19 @@ public class Decrypt
     public Decrypt()
     {
         // Generiere Primzahlen p und q
-        p = PrimeGenerator.genPrime();
-        q = PrimeGenerator.genPrime();
+        p = PrimeGenerator.GenPrime();
+        q = PrimeGenerator.GenPrime();
 
         n = p * q;
-        e = findE();
-        d = findD();
+        e = FindE();
+        d = FindD();
+        Console.WriteLine($"p: {p}");
+        Console.WriteLine($"q: {q}");
         Console.WriteLine($"d: {d}");
     
         // Debug ausgaben zur Ueberpruefung, ob E und D gueltig sind
         // Console.WriteLine($"E valid: {Euclid.GreatestCommonDivisor(e, phi()) == 1 && e < phi()}");
         // Console.WriteLine($"D valid: {e < phi() && (d * e) % phi() == 1}");
-        
-        
         
         // oeffentlichen Schluessel bekanntgeben
         Console.WriteLine("\nOeffentlicher Schluessel:\n" +
@@ -38,9 +38,9 @@ public class Decrypt
         return (p - 1) * (q - 1);
     }
 
-    private BigInteger findE()
+    private BigInteger FindE()
     {
-        // zufaelliger Startwert zwischen 1 und 99/100 phi(n)
+        // zufaelliger Startwert zwischen 2^16 und 2^256
         Random r = new Random();
         IEnumerable<BigInteger> startSequence = r.NextBigIntegerSequence(BigInteger.Pow(new BigInteger(2), 16), BigInteger.Pow(new BigInteger(2), 256));
         BigInteger start = startSequence.First();
@@ -54,7 +54,7 @@ public class Decrypt
     }
 
     // Das multiplikative inverse d von e und phi (den Privatschluessel) mithilfe des erweiterten euklidischen Algorithmus finden
-    private BigInteger findD()
+    private BigInteger FindD()
     {
         // fuehre erweiterten euklidischen Algorithmus durch
         BigInteger gcd = Euclid.ExtendedGreatestCommonDivisor(e, phi(), out BigInteger x, out BigInteger y);
@@ -62,10 +62,10 @@ public class Decrypt
         // modulares multiplikatives Inverses nur verfuegbar, wenn e und phi teilerfremd sind
         if (gcd != 1)
             throw new Exception("Kein Wert fuer d moeglich!");
-
+        
         // das modulare multiplikative Inverse ergibt sich aus dem erweiterten euklidischen Algorithmus
         // durch die Formel d = (x % phi + phi) % phi
-        // Das Phi in der Klammer wird dazu addiert, damit das Ergebnis auch fuer Zahlen funktioniert
+        // Das Phi in der Klammer wird dazu addiert, damit das Ergebnis auch fuer negative Zahlen funktioniert
         BigInteger inv = (x % phi() + phi()) % phi();
         return inv;
     }
@@ -73,9 +73,9 @@ public class Decrypt
     /// <summary>
     /// Entschluessele den Geheimtext c mit der Formel m = c^d mod m
     /// </summary>
-    /// <param name="c">Der geheimtext c</param>
+    /// <param name="c">Der Geheimtext c</param>
     /// <returns>den Klartext m</returns>
-    public byte decryptMessage(BigInteger c)
+    public byte DecryptMessage(BigInteger c)
     {
         BigInteger m = BigInteger.ModPow(c, d, n);
         return (byte)m;

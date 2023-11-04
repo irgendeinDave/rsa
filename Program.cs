@@ -8,7 +8,7 @@ public class Program
     /// <summary> 
     /// frage Benutzer nach Eingabe von Text
     /// </summary>
-    private static String promtInput()
+    private static String PromtInput()
     {
         Console.Write("Please enter your message: ");
         String? prompt = Console.ReadLine();
@@ -22,8 +22,8 @@ public class Program
         // Bestimme, ob entschluesselt oder verschluesselt werden soll
         if (args.Length > 0)
             input = args[0];
-        else // wenn keine Argumente gegeben wurden, fordere den Klartext vom Benutzer an
-            input = promtInput();
+        else // wenn keine Argumente gegeben wurden, fordere den Benutzer auf, einen Modus anzugeben
+            input = PromtInput();
 
         if (input == "encrypt" || input == "e")
         {
@@ -38,11 +38,11 @@ public class Program
                 string? message = Console.ReadLine();
 
                 // Codieren der Nachricht
-                byte[] encoded = textToBytes(message);
+                byte[] encoded = TextToBytes(message);
                 foreach (var encodedLetter in encoded)
                 {
                     // Verschluesseln der Nachricht
-                    Console.Write($"{Encrypt.encryptMessage(n, e, encodedLetter)} ");
+                    Console.Write($"{Encrypt.EncryptMessage(n, e, encodedLetter)} ");
                 }
                 Console.Write(new String('\n', 3));
             }
@@ -66,10 +66,10 @@ public class Program
                     if (string.IsNullOrEmpty(split[i]))
                         continue;
                     
-                    byte decrypted = decrypt.decryptMessage(BigInteger.Parse(split[i]));
+                    byte decrypted = decrypt.DecryptMessage(BigInteger.Parse(split[i]));
                     bytes[i] = decrypted;
                 }
-                Console.WriteLine($"Ihr Klartext lautet: {bytesToText(bytes)}");
+                Console.WriteLine($"Ihr Klartext lautet: {BytesToText(bytes)}");
                 Console.Write(new String('\n', 3));
             }
         } // ungueltiges Argument
@@ -78,10 +78,10 @@ public class Program
 
     #region UTF-8 Codierung
     // Codierung des Klartextes zu Byte-Array mithilfe der C#-Standardbibliothek
-    private static byte[] textToBytes(string? inputText)
+    private static byte[] TextToBytes(string? inputText)
     {
         if (inputText == null)
-            return new byte[0];
+            return Array.Empty<byte>();
 
         var utf8 = Encoding.UTF8;
         byte[] encoded = utf8.GetBytes(inputText);
@@ -89,7 +89,7 @@ public class Program
     }
 
     // Codierung des als Byte-Array gegebenen wieder entschluesselten Textes zu Klartext mithilfe der C#-Standardbibliothek
-    private static string bytesToText(byte[] bytes)
+    private static string BytesToText(byte[] bytes)
     {
         var utf8 = Encoding.UTF8;
         return utf8.GetString(bytes);

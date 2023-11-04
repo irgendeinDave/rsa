@@ -13,9 +13,9 @@ public static class PrimeGenerator
     /// <summary> 
     /// erzeuge Primzahl
     /// generiere einen zufaelligen Startwert und pruefe, ob er eine Primzahl ist
-    /// erhoehe den Startwert um 2 und pruefe den neuen Wert so lange, bis eine Primzahl gefunden wurde
+    /// erhoehe den Startwert so lange um 2, bis ein Wert er als Primzahl identifiziert worden ist
     /// </summary>
-    public static BigInteger genPrime()
+    public static BigInteger GenPrime()
     {
         // bestimme zufaelligen Startwert 
         Random r = new CryptoRandomSource();
@@ -43,7 +43,7 @@ public static class PrimeGenerator
     /// </returns>
     private static bool IsProbablyPrime(BigInteger m)
     {
-        // es duerfen nur ungerade Zahlen getestet werden
+        // es duerfen nur ungerade Zahlen getestet werden; gerade Zahlen sind automatisch keine Primzahlen
         if (m % 2 == 0)
             return false;
         
@@ -74,16 +74,16 @@ public static class PrimeGenerator
                 if(x == m - 1)
                     break;
             }
-            // Wenn nach Schleife x nicht m - 1 ist, ist m keine Primzahl
+            // Wenn nach der Schleife x nicht m - 1 ist, ist m keine Primzahl
             if (x != m - 1)
                 return false;
         }
-        // wenn nach allen Iterationen nicht festgestellt wurde, dass m die Bedingungen fuer eine Primzahl nicht erfuellt, ist m wohl eine Primzahl
+        // wenn nach allen Iterationen nicht festgestellt wurde, dass m die Bedingungen fuer eine Primzahl nicht erfuellt, ist m wahrscheinlich eine Primzahl
         return true;
     }
     
     /// <summary>
-    /// Finde den s, also die Anzahl, wie oft m ohne Rest durch zwei teilbar ist
+    /// Finde s, also die Anzahl, wie oft m ohne Rest durch 2 teilbar ist
     /// </summary>
     /// <param name="m">Die zu pruefende Zahl m</param>
     /// <returns>s</returns>
