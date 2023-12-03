@@ -31,9 +31,9 @@ public class Program
             {
                 // Eingaben anfordern
                 Console.WriteLine("Geben Sie n an: ");
-                BigInteger n = BigInteger.Parse(Console.ReadLine());
+                BigInteger n = BigInteger.Parse(Console.ReadLine()!);
                 Console.WriteLine("Geben Sie e an: ");
-                BigInteger e = BigInteger.Parse(Console.ReadLine());
+                BigInteger e = BigInteger.Parse(Console.ReadLine()!);
                 Console.WriteLine("Geben Sie die zu verschluesselnde Nachricht an: ");
                 string? message = Console.ReadLine();
 

@@ -30,7 +30,7 @@ public class Decrypt
         Console.WriteLine("\nOeffentlicher Schluessel:\n" +
         $"n: {n}\n" +
         $"e: {e}\n" +
-        "Text, der mit diesem Schluessel verschluesselt wurde, muss mit mit dieser Instanz des Programmes wieder entschluesselt werden");
+        "Text, der mit diesem Schluessel verschluesselt wurde, muss mit dieser Instanz des Programmes wieder entschluesselt werden");
     }
 
     private BigInteger phi()
@@ -73,7 +73,7 @@ public class Decrypt
     /// <summary>
     /// Entschluessele den Geheimtext c mit der Formel m = c^d mod m
     /// </summary>
-    /// <param name="c">Der Geheimtext c</param>
+    /// <param name="c">Der verschluesselte Text c</param>
     /// <returns>den Klartext m</returns>
     public byte DecryptMessage(BigInteger c)
     {
